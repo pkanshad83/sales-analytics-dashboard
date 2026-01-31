@@ -1,0 +1,39 @@
+.App {
+  padding: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+header {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+header h1 {
+  color: #343a40;
+  margin-bottom: 10px;
+}
+
+header p {
+  color: #6c757d;
+}
+
+main {
+  margin-bottom: 40px;
+}
+
+.summary {
+  margin-top: 30px;
+  padding: 20px;
+  background-color: #e9ecef;
+  border-radius: 8px;
+}
+
+footer {
+  margin-top: 50px;
+  padding-top: 20px;
+  border-top: 1px solid #dee2e6;
+  color: #6c757d;
+  font-size: 14px;
+  text-align: center;
+}

@@ -1,0 +1,12 @@
+{
+  "$schema": "https://railpack.com/schema.json",
+  "build": {
+    "builder": "NIXPACKS",
+    "buildCommand": "cd frontend && npm run build"
+  },
+  "deploy": {
+    "startCommand": "python manage.py migrate && gunicorn config.wsgi:application",
+    "healthcheckPath": "/",
+    "healthcheckTimeout": 300
+  }
+}

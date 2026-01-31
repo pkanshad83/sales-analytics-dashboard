@@ -173,3 +173,80 @@ CORS_ALLOW_HEADERS = [
     'x-csrftoken',
     'x-requested-with',
 ]
+
+# Railway/Railpack Production Settings
+import os
+import dj_database_url
+
+# Security
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'your-secret-key-here')
+
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    '.railpack.com',
+    '.railway.app',
+    '.onrender.com',
+    '.herokuapp.com',
+    '*',  # For testing, remove in production
+]
+
+# Database
+DATABASE_URL = os.environ.get('DATABASE_URL')
+if DATABASE_URL:
+    DATABASES = {
+        'default': dj_database_url.config(default=DATABASE_URL, conn_max_age=600)
+    }
+
+# Static files (for React build)
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'staticfiles')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'frontend/build/static'),
+]
+
+# CORS for production
+CORS_ALLOWED_ORIGINS = [
+    "https://your-app-name.railpack.com",
+    "https://your-app-name.railway.app",
+]
+
+# Allow all in development
+if DEBUG:
+    CORS_ALLOW_ALL_ORIGINS = True
+
+# Railpack/Production Settings
+import os
+from pathlib import Path
+
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Security
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-development-key')
+
+ALLOWED_HOSTS = ['*']  # For Railpack testing
+
+# Database
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+
+# Static files (WhiteNoise)
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'frontend/build'),
+]
+
+# Whitenoise for static files
+MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# CORS
+CORS_ALLOW_ALL_ORIGINS = True  # For testing, restrict in production

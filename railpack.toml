@@ -1,0 +1,17 @@
+[build]
+command = "./start.sh"
+
+[deploy]
+start_command = "gunicorn config.wsgi:application --bind 0.0.0.0:$PORT"
+
+[[environment]]
+name = "DEBUG"
+value = "False"
+
+[[environment]]
+name = "SECRET_KEY"
+generator = "secret"
+
+[[environment]]
+name = "DISABLE_COLLECTSTATIC"
+value = "0"

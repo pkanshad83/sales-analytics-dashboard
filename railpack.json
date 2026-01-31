@@ -1,0 +1,29 @@
+{
+  "name": "sales-analytics-dashboard",
+  "description": "Full-stack sales analytics dashboard with Django + React",
+  "scripts": {
+    "start": "./start.sh"
+  },
+  "buildpacks": [
+    {
+      "url": "heroku/python"
+    },
+    {
+      "url": "heroku/nodejs"
+    }
+  ],
+  "env": {
+    "DEBUG": {
+      "description": "Django debug mode",
+      "value": "False"
+    },
+    "SECRET_KEY": {
+      "description": "Django secret key",
+      "generator": "secret"
+    },
+    "DISABLE_COLLECTSTATIC": {
+      "description": "Disable collectstatic",
+      "value": "0"
+    }
+  }
+}
